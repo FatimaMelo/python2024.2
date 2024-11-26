@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Cliente
+from django.contrib.auth.hashers import make_password
 
 # Create your views here.
 
@@ -14,8 +15,11 @@ def salvar_cli(request):
     vnome = request.POST.get("nome")
     vtelefone = request.POST.get("telefone")
     vemail = request.POST.get("email")
+    vsenha = request.POST.get("senha")
+
+    senha_criptografada = make_password(vsenha)
     if vnome:
-        Cliente.objects.create(nome=vnome, telefone=vtelefone, email=vemail)
+        Cliente.objects.create(nome=vnome, telefone=vtelefone, email=vemail, senha=senha_criptografada)
     return redirect(fcliente)
 
 def exibir_cli(request, id):

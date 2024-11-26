@@ -1,0 +1,42 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+
+    .imagens img{
+        width:400px;
+        height:350px;
+     }
+
+
+</style>
+ <div class="container">
+        <h1 class="mb-4">Smartphones</h1>
+        <div class="row teste">
+            {% for produto in produtos %}
+            <div class="col-md-4 mb-4">
+                <div class="card imagens">
+                    {% if produto.imagem %}
+                    <img src="{{ produto.imagem.url }}" class="card-img-top" alt="{{ produto.nome }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ produto.nome }}</h5>
+                        <p class="card-text">{{ produto.descricao }}</p>
+                        <p class="card-text">Preço: R$ {{ produto.preco }}</p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <p>Não há produtos cadastrados.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}
